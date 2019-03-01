@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LearningAspNetCore_InternetShop.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +10,7 @@ namespace LearningAspNetCore_InternetShop.Data
             : base(options)
         {
         }
+
+        public DbSet<ServiceType> ServiceTypes { get; set; }
     }
 }
