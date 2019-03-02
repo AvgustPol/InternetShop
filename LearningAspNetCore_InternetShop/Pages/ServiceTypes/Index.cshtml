@@ -5,13 +5,15 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="container p-4">
+<div class="p-4">
     <div class="row">
-        <div class="col-6 p-0 m-0" ">
-            <h2 >Service types</h2>
+        <div class="col-6 p-0 m-0">
+            <h2>Service types</h2>
         </div>
         <div class="col-6 text-right p-0 m-0">
-            <a class="btn btn-outline-dark" href="#"><i class="fas fa-plus"></i>&nbsp Create</a>
+            <a asp-page="Create" class="btn btn-outline-dark">
+                <i class="fas fa-plus"></i>&nbsp Create
+            </a>
         </div>
     </div>
     <br />
@@ -36,7 +38,19 @@
                         <tr>
                             <td>@Html.DisplayFor(m => item.Name)</td>
                             <td>@Html.DisplayFor(m => item.Price)</td>
-                            <td></td>
+                            <td style="width:15%">
+                                <div class="btn-group-sm" role="group">
+                                    <a class="btn btn-outline-dark" asp-page="Edit" asp-route-Id="@item.Id">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-outline-dark" asp-page="Details" asp-route-Id="@item.Id">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    <a class="btn btn-outline-dark" asp-page="Delete" asp-route-Id="@item.Id">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -44,6 +58,3 @@
         }
     </div>
 </div>
-
-
-

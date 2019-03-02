@@ -10,12 +10,13 @@ namespace LearningAspNetCore_InternetShop.Pages.ServiceTypes
 {
     public class IndexModel : PageModel
     {
+        private readonly ApplicationDbContext _dbContext;
+
         public IndexModel(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public ApplicationDbContext _dbContext { get; set; }
         public bool IsAnyServiceType => ServiceTypes.Count > 0;
         public IList<ServiceType> ServiceTypes { get; set; }
 
