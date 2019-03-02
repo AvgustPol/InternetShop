@@ -16,6 +16,7 @@ namespace LearningAspNetCore_InternetShop.Pages.ServiceTypes
         }
 
         public ApplicationDbContext _dbContext { get; set; }
+        public bool IsAnyServiceType => ServiceTypes.Count > 0;
         public IList<ServiceType> ServiceTypes { get; set; }
 
         public async Task<IActionResult> OnGet()
