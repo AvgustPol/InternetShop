@@ -1,17 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LearningAspNetCore_InternetShop.Data;
+using LearningAspNetCore_InternetShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LearningAspNetCore_InternetShop.Pages.ServiceTypes
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public IndexModel(ApplicationDbContext dbContext)
         {
+            _dbContext = dbContext;
+        }
 
+        public ApplicationDbContext _dbContext { get; set; }
+        public IList<ServiceType> ServiceTypes { get; set; }
+
+        public async Task<IActionResult> OnGet()
+        {
+            ServiceTypes = await _dbContext.ServiceTypes.ToListAsync();
+            return Page();
         }
     }
 }
