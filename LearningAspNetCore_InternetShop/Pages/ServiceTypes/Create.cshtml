@@ -7,7 +7,7 @@
 
 <h2>Create a new ServiceType</h2>
 <br />
-@*form-group*@
+
 <div class="border container rounded p-3">
     <form method="post">
         <div class="row form-group ">
@@ -30,7 +30,7 @@
         </div>
         <div class="row form-group ">
             <div class="col-5 offset-2">
-                <partial name="_CreateAndBackToIndexButtonsPartial" />
+                @await Html.PartialAsync("_SubmitAndBackToIndexButtonsPartial", "Create")
             </div>
         </div>
     </form>
