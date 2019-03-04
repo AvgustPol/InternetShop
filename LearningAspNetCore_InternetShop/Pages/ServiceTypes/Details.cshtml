@@ -10,34 +10,32 @@
 <br />
 
 <div class="border container rounded p-3">
-        <div class="row form-group ">
-            <div class="col-2 ">
-                <label asp-for="ServiceType.Name"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="ServiceType.Name" class="form-control" readonly />
-            </div>
-            <span asp-validation-for="ServiceType.Name" class="text-danger"></span>
+    <div class="row form-group ">
+        <div class="col-2 ">
+            <label asp-for="ServiceType.Name"></label>
         </div>
-        <div class="row form-group">
-            <div class="col-2 ">
-                <label asp-for="ServiceType.Price"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="ServiceType.Price" type="number" class="form-control" readonly />
-            </div>
-            <span asp-validation-for="ServiceType.Price" class="text-danger"></span>
+        <div class="col-5">
+            <input asp-for="ServiceType.Name" class="form-control" readonly />
         </div>
-        <div class="row form-group ">
-            <div class="col-5 offset-2">
-                <div class="row">
-                    <div class="col-6">
-                        <a asp-page="./Index" class="btn btn-outline-secondary form-control">Back to list</a>
-                    </div>
-                    <div class="col-6">
-                        <a asp-page="./Edit" asp-route-id="@Model.ServiceType.Id" class="btn btn-success form-control">Edit</a>
-                    </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-2 ">
+            <label asp-for="ServiceType.Price"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="ServiceType.Price" type="number" class="form-control" readonly />
+        </div>
+    </div>
+    <div class="row form-group ">
+        <div class="col-5 offset-2">
+            <div class="row">
+                <div class="col-6">
+                    <a asp-page="./Index" class="btn btn-outline-secondary form-control">Back to list</a>
+                </div>
+                <div class="col-6">
+                    <a asp-page="./Edit" asp-route-id="@Model.ServiceType.Id" class="btn btn-success form-control">Edit</a>
                 </div>
             </div>
         </div>
+    </div>
 </div>
