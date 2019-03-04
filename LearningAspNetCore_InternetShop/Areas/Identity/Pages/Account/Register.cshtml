@@ -6,7 +6,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="row">
+<div class="row ">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -26,6 +26,16 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.FacebookLink"></label>
+                <input asp-for="Input.FacebookLink" class="form-control" />
+                <span asp-validation-for="Input.FacebookLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Position"></label>
+                <input asp-for="Input.Position" class="form-control" />
+                <span asp-validation-for="Input.Position" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
