@@ -11,6 +11,7 @@ namespace LearningAspNetCore_InternetShop.Data
         {
         }
 
+        public DbSet<CustomUser> CustomUsers { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
     }
 }
