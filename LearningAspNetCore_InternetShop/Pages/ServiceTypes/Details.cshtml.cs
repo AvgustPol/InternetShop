@@ -9,11 +9,11 @@ namespace LearningAspNetCore_InternetShop.Pages.ServiceTypes
 {
     public class DetailsModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _dbContext;
 
         public DetailsModel(ApplicationDbContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         public ServiceType ServiceType { get; set; }
@@ -25,7 +25,7 @@ namespace LearningAspNetCore_InternetShop.Pages.ServiceTypes
                 return NotFound();
             }
 
-            ServiceType = await _context.ServiceTypes.FirstOrDefaultAsync(m => m.Id == id);
+            ServiceType = await _dbContext.ServiceTypes.FirstOrDefaultAsync(m => m.Id == id);
 
             if (ServiceType == null)
             {
