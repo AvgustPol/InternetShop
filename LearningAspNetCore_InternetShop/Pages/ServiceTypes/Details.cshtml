@@ -1,23 +1,21 @@
 ﻿@page
-@model LearningAspNetCore_InternetShop.Pages.ServiceTypes.EditModel
+@model LearningAspNetCore_InternetShop.Pages.ServiceTypes.DetailsModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Edit the [@Model.ServiceType.Name] ServiceType</h2>
+<h2>Details for the [@Model.ServiceType.Name] ServiceType</h2>
 <br />
 
 <div class="border container rounded p-3">
-    <form method="post">
-        <input type="hidden" asp-for="ServiceType.Id" />
         <div class="row form-group ">
             <div class="col-2 ">
                 <label asp-for="ServiceType.Name"></label>
             </div>
             <div class="col-5">
-                <input asp-for="ServiceType.Name" class="form-control" />
+                <input asp-for="ServiceType.Name" class="form-control" readonly />
             </div>
             <span asp-validation-for="ServiceType.Name" class="text-danger"></span>
         </div>
@@ -26,18 +24,20 @@
                 <label asp-for="ServiceType.Price"></label>
             </div>
             <div class="col-5">
-                <input asp-for="ServiceType.Price" type="number" class="form-control" />
+                <input asp-for="ServiceType.Price" type="number" class="form-control" readonly />
             </div>
             <span asp-validation-for="ServiceType.Price" class="text-danger"></span>
         </div>
         <div class="row form-group ">
             <div class="col-5 offset-2">
-                @await Html.PartialAsync("_SubmitAndBackToIndexButtonsPartial", "Update")
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-page="./Index" class="btn btn-outline-secondary form-control">Back to list</a>
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="./Edit" asp-route-id="@Model.ServiceType.Id" class="btn btn-success form-control">Edit</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
