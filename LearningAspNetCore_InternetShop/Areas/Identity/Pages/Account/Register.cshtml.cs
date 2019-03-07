@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using LearningAspNetCore_InternetShop.Data;
+using LearningAspNetCore_InternetShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +15,16 @@ namespace LearningAspNetCore_InternetShop.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        private readonly ApplicationDbContext _dbContext;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
 
         public RegisterModel(
+            ApplicationDbContext dbContext,
+            RoleManager<IdentityRole> roleManager,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
@@ -28,6 +34,8 @@ namespace LearningAspNetCore_InternetShop.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _dbContext = dbContext;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -45,10 +53,33 @@ namespace LearningAspNetCore_InternetShop.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new CustomUser
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    FacebookLink = Input.FacebookLink,
+                    Position = Input.Position
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    #region If Role doesnt Exists -> Create a new
+
+                    if (!await _roleManager.RoleExistsAsync(Constants.Constants.AdminUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(Constants.Constants.AdminUser));
+                    }
+
+                    if (!await _roleManager.RoleExistsAsync(Constants.Constants.CustomUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(Constants.Constants.CustomUser));
+                    }
+
+                    #endregion If Role doesnt Exists -> Create a new
+
+                    //Make a new user Admin (education purposes)
+                    await _userManager.AddToRoleAsync(user, Constants.Constants.AdminUser);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
