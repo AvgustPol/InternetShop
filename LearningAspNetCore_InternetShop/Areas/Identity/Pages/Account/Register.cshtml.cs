@@ -77,8 +77,8 @@ namespace LearningAspNetCore_InternetShop.Areas.Identity.Pages.Account
 
                     #endregion If Role doesnt Exists -> Create a new
 
-                    //Make a new user Admin (education purposes)
-                    await _userManager.AddToRoleAsync(user, Constants.Constants.AdminUser);
+                    //Every new user will be assign with the role "user"
+                    await _userManager.AddToRoleAsync(user, Constants.Constants.CustomUser);
 
                     _logger.LogInformation("User created a new account with password.");
 
